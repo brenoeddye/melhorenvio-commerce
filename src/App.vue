@@ -31,3 +31,12 @@ export default defineComponent({
 <template>
   <RouterView />
 </template>
+
+<style lang="scss">
+body {
+  font-family: $primary-font;
+  background-color: var(--body-background);
+  color: var(--font-color);
+  transition: all .3s linear;
+}
+</style>

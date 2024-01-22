@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    white-space: normal;
+    text-rendering: optimizeLegibility!important;
+    -webkit-font-smoothing: antialiased!important;
+    // appearance: none;
+    // -moz-appearance: none;
+    // -webkit-appearance: none;
+    &:focus, &:active{
+      box-shadow: 0 0 0 0;
+      border: 0 none;
+      outline: 0 !important;
+      background-color: none;
+    }
+    letter-spacing: -0.4px;
+
+    ::selection {
+      background-color: var(--body-background);
+      color: var(--font-color);
+    }
+  }
+    
+  html, body {
+  
+    mark,
+    .mark {
+      background: none;
+    }
+  
+    hr {
+      background: none;
+      border-top: 1px solid;
+      float: left;
+      width: 100%;
+      position: relative;
+  
+    }
+  
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--font-color);
+  
+      &:focus, &:active {
+        outline: thin dotted !important;
+        outline: 0px auto -webkit-focus-ring-color !important;
+        outline-offset: 0px !important;
+        outline: none !important;
+      }
+    }
+      input:focus, textarea:focus, select:focus{
+        outline: none;
+    }
+    
+    // Zerando comportamento padrão do chrome para auto preenchimento de forms que deixa o input com fundo amarelo
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+  }
