@@ -13,8 +13,8 @@ import router from './router'
 brBundle.addResource(new FluentResource(brMessages))
 
 const fluent = createFluentVue({
-    bundles: [brBundle]
-  })
+  bundles: [brBundle]
+})
 
 const app = createApp(App)
 

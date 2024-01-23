@@ -7,24 +7,13 @@ import enMessages from './languages/en.ftl?raw'
 import brMessages from './languages/br.ftl?raw'
 
 export default defineComponent({
+  inject: ['$fluent'],
   data() {
     return {
       enBundle: new FluentBundle('en'),
       brBundle: new FluentBundle('br')
     }
   },
-  methods: {
-    changeLanguage() {
-      this.enBundle.addResource(new FluentResource(enMessages))
-      this.brBundle.addResource(new FluentResource(brMessages))
-
-      var newFluent = createFluentVue({
-        bundles: [this.enBundle]
-      });
-
-      this.$fluent.bundles = newFluent.bundles;
-    },
-  }
 })
 </script>
 

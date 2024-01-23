@@ -1,4 +1,4 @@
-import { type IMenu } from "../types/menuTypes.ts";
+import { type IMenu } from "../types/menuTypes";
 
 const menuContent: IMenu[] = [
     {
