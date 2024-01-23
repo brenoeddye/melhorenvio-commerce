@@ -17,11 +17,11 @@
       outline: 0 !important;
       background-color: none;
     }
-    letter-spacing: -0.4px;
+    letter-spacing: 0px;
 
     ::selection {
-      background-color: var(--body-background);
-      color: var(--font-color);
+      background-color: var(--body-selection);
+      color: var(--font-color-reverse);
     }
   }
     
