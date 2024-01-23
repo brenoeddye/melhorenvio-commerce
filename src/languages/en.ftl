@@ -13,5 +13,8 @@ menu-shoes = Shoes
 menu-pajamas = Pajamas
 menu-underwear = Underwear
 
+-> HomeView
+home-title = Products
+
 -> Buttons
 btn-add = Add to cart

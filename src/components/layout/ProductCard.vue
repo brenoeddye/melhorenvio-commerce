@@ -52,6 +52,11 @@ export default defineComponent({
     padding: 12px;
     max-width: 230px;
     min-width: 230px;
+
+    @include phone {
+        max-width: 100%;
+        min-width: 100%;
+    }
     
     &:focus {
         border: 1px solid var(--secondary-border);

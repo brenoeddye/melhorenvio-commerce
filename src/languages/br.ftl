@@ -13,5 +13,8 @@ menu-shoes = Sapatos
 menu-pajamas = Pijamas
 menu-underwear = Roupas intimas
 
+-> HomeView
+home-title = Produtos
+
 -> Buttons
 btn-add = Adicionar
