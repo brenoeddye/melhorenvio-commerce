@@ -6,7 +6,21 @@ export default defineComponent({
         name: String,
         price: String,
         imgSrc: String,
-    }
+    },
+    data() {
+        return {
+            imgObj: {
+                src: this.imgSrc,
+                loading: '/imgs/loading.svg'
+            }
+        }
+    },
+    computed: {
+        limitedName() {
+            const maxLength = 32;
+            return this.name ? (this.name.length > maxLength ? `${this.name.slice(0, maxLength)}...` : this.name) : '';
+        },
+    },
 })
 </script>
 
@@ -14,27 +28,52 @@ export default defineComponent({
     <div class="product">
         <div class="product__header">
             <span>{{ price }}</span>
+
+            <baseIcon icon="heart" width="18" height="16" colors="secondary"/>
         </div>
         <figure class="product__figure">
-            <img class="product__figure--img" :src="imgSrc" :alt="name">
+            <img class="product__figure--img" v-lazy="imgObj" :alt="name">
         </figure>
         <figcaption class="product__figcaption">
-            <h2 class="product__figcaption--name">{{ name }}</h2>
+            <h2 class="product__figcaption--name">{{ limitedName }}</h2>
         </figcaption>
 
-        <baseButton>{{ $t('btn-add') }}</baseButton>
+        <baseButton type="primary">{{ $t('btn-add') }}</baseButton>
     </div>
 </template>
 
 <style lang="scss" scoped>
 .product {
+    position: relative;
     background-color: var(--secondary);
     border: 1px solid var(--secondary-border);
-    box-shadow: 0px 2px 5px #26303C33;
+    box-shadow: var(--box-shadow);
     border-radius: 8px;
+    padding: 12px;
+    max-width: 230px;
+    min-width: 230px;
+    
+    &:focus {
+        border: 1px solid var(--secondary-border);
+        box-shadow: var(--box-shadow);
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     &__figure {
+        position: relative;
         max-width: 120px;
+        min-height: 220px;
+        max-height: 220px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        z-index: $product;
+
         &--img {
             width: 100%;
         }
@@ -44,7 +83,12 @@ export default defineComponent({
         &--name {
             font-size: 14px;
             font-weight: 400;
+            margin: 6px 0 14px;
         }
+    }
+
+    button {
+        width: 100%;
     }
 }
 </style>

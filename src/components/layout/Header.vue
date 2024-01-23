@@ -55,6 +55,7 @@ export default defineComponent({
     top: 0;
     left: 0;
     padding: 20px 0;
+    z-index: $header;
 
     & > .container {
         @include container;
@@ -117,7 +118,6 @@ export default defineComponent({
     }
 
     &__search {
-
         & > .container {
             @include phone {
                 @include container;
@@ -127,6 +127,7 @@ export default defineComponent({
         &--form {
             display: flex;
             align-items: center;
+            background-color: var(--secondary);
             border: 1px solid var(--secondary-border);
             border-radius: 6px;
             padding: 8px 14px;

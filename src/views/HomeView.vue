@@ -45,5 +45,16 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
+.home {
+    padding-top: 80px;
 
+    &__showcase {
+        .container {
+            @include container;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    }
+}
 </style>
