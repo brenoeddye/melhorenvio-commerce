@@ -49,7 +49,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .header {
-    background-color: transparent;
+    background-color: var(--secondary);
     position: fixed;
     width: 100%;
     top: 0;
@@ -118,6 +118,9 @@ export default defineComponent({
     }
 
     &__search {
+        background-color: var(--secondary);
+        padding-bottom: 8px;
+        
         & > .container {
             @include phone {
                 @include container;
