@@ -51,9 +51,9 @@ export default defineComponent({
     &__showcase {
         .container {
             @include container;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px; 
         }
     }
 }
