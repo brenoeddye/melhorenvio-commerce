@@ -83,6 +83,7 @@ export default defineComponent({
         &--name {
             font-size: 14px;
             font-weight: 400;
+            min-height: 31px;
             margin: 6px 0 14px;
         }
     }
