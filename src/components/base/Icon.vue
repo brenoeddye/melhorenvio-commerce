@@ -4,11 +4,12 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
-        icon:   String,
-        width:  String,
-        height: String,
-        colors: String,
-        badge:  Number
+        icon:       String,
+        width:      String,
+        height:     String,
+        colors:     String,
+        badge:      Number,
+        clickable:  Boolean,
     },
     computed: {
         iconData() {
@@ -26,7 +27,9 @@ export default defineComponent({
         <div v-if="badge" class="badge">
             {{ badge }}
         </div>
-        <i class="icon" v-if="iconSource" :style="{ backgroundImage: `url(${iconSource})`, width: `${width}px`, height: `${height}px` }" :class="colors"></i>
+        <i  :class="'icon ' + colors" 
+            v-if="iconSource" 
+            :style="{ backgroundImage: `url(${iconSource})`, width: `${width}px`, height: `${height}px`, cursor: clickable ? `pointer` : `default` }"></i>
     </div>
 </template>
 

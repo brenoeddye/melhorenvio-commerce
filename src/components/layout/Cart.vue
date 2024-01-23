@@ -36,7 +36,7 @@ export default defineComponent({
 <template>
     <div class="cart" :class="{ active: show }">
         <div class="cart__header">
-            <baseIcon @click="toggleCart" icon="arrow-left" width="26" height="24" colors="primary" style="cursor: pointer;"/>
+            <baseIcon @click="toggleCart" icon="arrow-left" width="26" height="24" colors="primary" clickable/>
             <h2 class="cart__header--title">{{ $t('cart-title') }}</h2>
         </div>
         <ul class="cart__items">

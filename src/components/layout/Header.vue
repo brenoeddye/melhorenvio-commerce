@@ -30,6 +30,9 @@ export default defineComponent({
 <template>
     <header class="header">
         <div class="container">
+            <router-link to="/" class="header__logo">
+                <img src="/imgs/logo.webp" alt="store-logo">
+            </router-link>
             <div class="header__profile">
                 <h3 class="header__profile--username">{{ $t('header-username') }}</h3>
                 <p class="header__profile--address">{{ $t('header-address') }}</p>
@@ -52,12 +55,10 @@ export default defineComponent({
                     </form>
                 </div>
             </div>
-            <div class="header__search--shortcut">
-                <baseIcon icon="search" colors="primary" />
-            </div>
             <div class="header__utils">
-                <baseIcon @click="toggleCart" icon="cart" width="36.26" height="36.26" colors="primary" :badge="totalItems" style="cursor:pointer;"/>
-                <baseIcon icon="user" width="36.26" height="36.26" colors="primary"/>
+                <baseIcon class="header__utils--search" icon="search" width="30" height="30" colors="primary" clickable/>
+                <baseIcon @click="toggleCart" icon="cart" width="30" height="30" colors="primary" :badge="totalItems" clickable/>
+                <baseIcon icon="user" width="30" height="30" colors="primary" clickable/>
             </div>
         </div>
     </header>
@@ -80,6 +81,18 @@ export default defineComponent({
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    &__logo {
+        max-width: 100px;
+
+        @include tablet {
+            display: none;
+        }
+
+        img {
+            width: 100%;
+        }
     }
 
     &__profile {
@@ -190,6 +203,19 @@ export default defineComponent({
 
     &__utils {
         display: flex;
+
+        @include desktop {
+            justify-content: space-between;
+            max-width: 120px;
+            width: 100%;
+        }
+
+        &--search {
+            display: none;
+            @include desktop {
+                display: block;
+            }
+        }
     }
 }
 </style>
