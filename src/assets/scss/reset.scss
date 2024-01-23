@@ -12,9 +12,6 @@
     // -moz-appearance: none;
     // -webkit-appearance: none;
     &:focus, &:active{
-      box-shadow: 0 0 0 0;
-      border: 0 none;
-      outline: 0 !important;
       background-color: none;
     }
     letter-spacing: 0px;
