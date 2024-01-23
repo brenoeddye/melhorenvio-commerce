@@ -36,6 +36,7 @@ export default defineComponent({
                 <ul class="container">
                     <layoutProductCard
                         v-for="product in products" :key="product.id"
+                        :id="product.id"
                         :name="product.title"
                         :price="product.price"
                         :imgSrc="product.image" />

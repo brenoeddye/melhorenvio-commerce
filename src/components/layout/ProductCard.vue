@@ -1,10 +1,12 @@
 <script lang="ts">
+import { useCartStore } from '@/stores/cart';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
-        name: String,
-        price: String,
+        id:     Number,
+        name:   String,
+        price:  Number,
         imgSrc: String,
     },
     data() {
@@ -14,6 +16,18 @@ export default defineComponent({
                 loading: '/imgs/loading.svg'
             }
         }
+    },
+    methods: {
+        addToCart() {
+            const productToAdd = {
+                id:     this.id,
+                name:   this.name,
+                price:  this.price,
+                imgSrc: this.imgSrc,
+            };
+
+            useCartStore().addToCart(productToAdd);
+        },
     },
     computed: {
         limitedName() {
@@ -27,7 +41,7 @@ export default defineComponent({
 <template>
     <div class="product">
         <div class="product__header">
-            <span>{{ price }}</span>
+            <span>{{ $t('currency') }}{{ price }}</span>
 
             <baseIcon icon="heart" width="18" height="16" colors="secondary"/>
         </div>
@@ -38,7 +52,7 @@ export default defineComponent({
             <h2 class="product__figcaption--name">{{ limitedName }}</h2>
         </figcaption>
 
-        <baseButton type="primary">{{ $t('btn-add') }}</baseButton>
+        <baseButton @click="addToCart" type="primary">{{ $t('btn-add') }}</baseButton>
     </div>
 </template>
 

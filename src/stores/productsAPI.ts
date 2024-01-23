@@ -1,14 +1,6 @@
 import { defineStore } from 'pinia';
 import { getProducts } from '../core/api/fakeAPI';
-
-interface IProduct {
-    id:             number,
-    title:          string,
-    price:          string,
-    category:       string,
-    description:    string,
-    image:          string,
-}
+import { type IProduct } from '@/core/types/productTypes';
 
 export interface ProductsState {
   products: IProduct[];

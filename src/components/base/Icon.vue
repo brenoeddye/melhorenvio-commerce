@@ -4,10 +4,11 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
-        icon: String,
-        width: String,
+        icon:   String,
+        width:  String,
         height: String,
-        colors: String
+        colors: String,
+        badge:  Number
     },
     computed: {
         iconData() {
@@ -21,11 +22,19 @@ export default defineComponent({
 </script>
 
 <template>
-    <i class="app-icon" v-if="iconSource" :style="{ backgroundImage: `url(${iconSource})`, width: `${width}px`, height: `${height}px` }" :class="colors"></i>
+    <div class="app-icon">
+        <div v-if="badge" class="badge">
+            {{ badge }}
+        </div>
+        <i class="icon" v-if="iconSource" :style="{ backgroundImage: `url(${iconSource})`, width: `${width}px`, height: `${height}px` }" :class="colors"></i>
+    </div>
 </template>
 
 <style lang="scss" scoped>
 .app-icon {
+    position: relative;
+}
+.icon {
     background-size: 100%;
     display: flex;
 
@@ -36,5 +45,16 @@ export default defineComponent({
     &.white {
         filter: invert(100%) sepia(0%) saturate(7478%) hue-rotate(40deg) brightness(105%) contrast(105%);
     }
+}
+.badge {
+    background-color: var(--primary);
+    filter: none;
+    color: var(--font-color-reverse);
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 100%;
+    position: absolute;
+    right: -5px;
+    z-index: $badge;
 }
 </style>

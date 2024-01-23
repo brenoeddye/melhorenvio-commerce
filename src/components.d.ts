@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     BaseIcon: typeof import('./components/base/Icon.vue')['default']
     BaseMenu: typeof import('./components/base/Menu.vue')['default']
     BaseModal: typeof import('./components/base/Modal.vue')['default']
+    LayoutCart: typeof import('./components/layout/Cart.vue')['default']
     LayoutFooter: typeof import('./components/layout/Footer.vue')['default']
     LayoutHeader: typeof import('./components/layout/Header.vue')['default']
     LayoutProductCard: typeof import('./components/layout/ProductCard.vue')['default']

@@ -1,3 +1,6 @@
+-> General
+currency = R$
+
 -> Header
 header-username = Olá, Dwight
 header-address = 1725 Slough Avenue
@@ -13,8 +16,18 @@ menu-shoes = Sapatos
 menu-pajamas = Pijamas
 menu-underwear = Roupas intimas
 
--> HomeView
-home-title = Produtos
-
 -> Buttons
 btn-add = Adicionar
+
+-> Cart
+cart-title = Meu carrinho
+cart-total = Total
+
+cart-payment-detail = Detalhes de pagamento
+cart-resume-items = Número de itens:
+cart-resume-quantity = itens
+cart-resume-subtotal = Subtotal:
+cart-resume-finish = Finalizar compra
+
+-> HomeView
+home-title = Produtos

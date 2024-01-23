@@ -1,13 +1,29 @@
 <script lang="ts">
 import menuData from '../../core/data/menuData';
+import { useCartStore } from '@/stores/cart';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
     data() {
         return {
-            menuData: menuData
+            menuData: menuData,
+
+            showCart: false
         }
-    }
+    },
+    methods: {
+        toggleCart() {
+            return this.showCart = !this.showCart;
+        }
+    },
+    computed: {
+        cartItems() {
+            return useCartStore().items;
+        },
+        totalItems() {
+            return this.cartItems.reduce((total, item) => total + item.quantity, 0);
+        }
+    },
 })
 </script>
 
@@ -40,11 +56,13 @@ export default defineComponent({
                 <baseIcon icon="search" colors="primary" />
             </div>
             <div class="header__utils">
-                <baseIcon icon="cart" width="36.26" height="36.26" colors="primary"/>
+                <baseIcon @click="toggleCart" icon="cart" width="36.26" height="36.26" colors="primary" :badge="totalItems" style="cursor:pointer;"/>
                 <baseIcon icon="user" width="36.26" height="36.26" colors="primary"/>
             </div>
         </div>
     </header>
+
+    <layoutCart :show="showCart" @toggleCart="toggleCart"/>
 </template>
 
 <style lang="scss" scoped>
