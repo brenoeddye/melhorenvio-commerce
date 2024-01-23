@@ -8,7 +8,8 @@ export default defineComponent({
         return {
             menuData: menuData,
 
-            showCart: false
+            showSearch: false,
+            showCart: false,
         }
     },
     methods: {
@@ -37,7 +38,7 @@ export default defineComponent({
                 <h3 class="header__profile--username">{{ $t('header-username') }}</h3>
                 <p class="header__profile--address">{{ $t('header-address') }}</p>
             </div>
-            <nav class="header__navbar">
+            <nav class="header__navbar" :class="{ hide: showSearch }">
                 <ul>
                     <li class="header__navbar--title">
                         {{ $t('header-navbar-title') }}
@@ -47,16 +48,17 @@ export default defineComponent({
                     </li>
                 </ul>
             </nav>
-            <div class="header__search">
+            <div class="header__search" :class="{ active: showSearch }">
                 <div class="container">
                     <form class="header__search--form">
+                        <baseIcon @click="showSearch = !showSearch" class="header__search--close" icon="close" width="20" height="20" colors="secondary" clickable/>
                         <input class="header__search--input" type="text" placeholder="Busque seu produto">
                         <input class="header__search--submit" type="submit" value="Search">
                     </form>
                 </div>
             </div>
             <div class="header__utils">
-                <baseIcon class="header__utils--search" icon="search" width="30" height="30" colors="primary" clickable/>
+                <baseIcon @click="showSearch = !showSearch" class="header__utils--search" icon="search" width="30" height="30" colors="primary" clickable/>
                 <baseIcon @click="toggleCart" icon="cart" width="30" height="30" colors="primary" :badge="totalItems" clickable/>
                 <baseIcon icon="user" width="30" height="30" colors="primary" clickable/>
             </div>
@@ -114,35 +116,44 @@ export default defineComponent({
         }
     }
 
-    &__navbar ul {
-        display: flex;
-
-        @include phone {
-            display: none;
+    &__navbar {
+        @include desktop {
+            &.hide {
+                visibility: hidden;
+                opacity: 0;
+            }
         }
 
-        @include tablet {
-            display: none;
-        }
+        ul {
+            display: flex;
 
-        li {
-            padding-right: 18px;
-            
-            a {
-                color: var(--font-color);
-                transition: all .3s linear;
-
-                &:hover {
-                    color: var(--primary-hover);
-                }
+            @include phone {
+                display: none;
             }
 
-            &.header__navbar--title {
-                @include tablet {
-                    display: none;
+            @include tablet {
+                display: none;
+            } 
+
+            li {
+                padding-right: 18px;
+                
+                a {
+                    color: var(--font-color);
+                    transition: all .3s linear;
+
+                    &:hover {
+                        color: var(--primary-hover);
+                    }
                 }
-                @include desktop {
-                    display: none;
+
+                &.header__navbar--title {
+                    @include tablet {
+                        display: none;
+                    }
+                    @include desktop {
+                        display: none;
+                    }
                 }
             }
         }
@@ -151,6 +162,8 @@ export default defineComponent({
     &__search {
         background-color: var(--secondary);
         padding-bottom: 8px;
+        width: 100%;
+        margin: 0 20px;
         
         & > .container {
             @include phone {
@@ -183,10 +196,35 @@ export default defineComponent({
             left: 0;
         }
 
-        &--input {
-            @include phone {
+        @include desktop {
+            position: fixed;
+            width: 40%;
+            left: 30%;
+            visibility: hidden;
+            opacity: 0;
+            transition: all .3s linear;
+
+            &.active {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            &--input {
                 width: 100%;
             }
+        }
+
+        &--close {
+            display: none;
+
+            @include desktop {
+                display: block;
+                margin-right: 8px;
+            }
+        }
+
+        &--input {
+            width: 100%;
         }
 
         &--submit {
