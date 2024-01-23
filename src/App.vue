@@ -7,7 +7,6 @@ import enMessages from './languages/en.ftl?raw'
 import brMessages from './languages/br.ftl?raw'
 
 export default defineComponent({
-  inject: ['$fluent'],
   data() {
     return {
       enBundle: new FluentBundle('en'),

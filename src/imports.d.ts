@@ -13,6 +13,7 @@ declare global {
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getProducts: typeof import('/Users/brenopereira/project/melhorenvio-commerce/src/core/api/fakeAPI')['getProducts']
   const h: typeof import('vue')['h']
   const inject: typeof import('vue')['inject']
   const isReadonly: typeof import('vue')['isReadonly']
@@ -23,7 +24,7 @@ declare global {
   const mapStores: typeof import('pinia')['mapStores']
   const mapWritableState: typeof import('pinia')['mapWritableState']
   const markRaw: typeof import('vue')['markRaw']
-  const menuData: typeof import('C:/Users/breno/OneDrive/Documentos/Development/melhorenvio-commerce/src/core/data/menuData')['default']
+  const menuData: typeof import('/Users/brenopereira/project/melhorenvio-commerce/src/core/data/menuData')['default']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -78,6 +79,7 @@ declare module 'vue' {
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getProducts: UnwrapRef<typeof import('/Users/brenopereira/project/melhorenvio-commerce/src/core/api/fakeAPI')['getProducts']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
@@ -88,7 +90,7 @@ declare module 'vue' {
     readonly mapStores: UnwrapRef<typeof import('pinia')['mapStores']>
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
-    readonly menuData: UnwrapRef<typeof import('C:/Users/breno/OneDrive/Documentos/Development/melhorenvio-commerce/src/core/data/menuData')['default']>
+    readonly menuData: UnwrapRef<typeof import('/Users/brenopereira/project/melhorenvio-commerce/src/core/data/menuData')['default']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>

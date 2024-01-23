@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     BaseModal: typeof import('./components/base/Modal.vue')['default']
     LayoutFooter: typeof import('./components/layout/Footer.vue')['default']
     LayoutHeader: typeof import('./components/layout/Header.vue')['default']
+    LayoutProductCard: typeof import('./components/layout/ProductCard.vue')['default']
     LayoutProductItem: typeof import('./components/layout/ProductItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
