@@ -66,6 +66,7 @@ export default defineComponent({
     padding: 12px;
     max-width: 230px;
     min-width: 230px;
+    transition: all .3s linear;
 
     @include phone {
         max-width: 100%;

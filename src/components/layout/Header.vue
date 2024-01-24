@@ -1,6 +1,8 @@
 <script lang="ts">
 import menuData from '../../core/data/menuData';
+import { useProductsStore } from '@/stores/productsAPI';
 import { useCartStore } from '@/stores/cart';
+import { type IProduct } from '@/core/types/productTypes';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -9,9 +11,13 @@ export default defineComponent({
         return {
             menuData: menuData,
 
+            searchQuery: '',
+            searchResults: [] as IProduct[],
+
             showSearch: false,
             showCart: false,
             showMenu: false,
+            showPreview: false,
 
             dataTheme: localStorage.getItem('data-theme')
         }
@@ -25,6 +31,16 @@ export default defineComponent({
             return this.showMenu = !this.showMenu;
         },
 
+        toggleSearch() {
+            return this.showPreview = !this.showPreview;
+        },
+
+        closeAllSearch() {
+            this.showSearch = false;
+            this.showPreview = false;
+            this.searchQuery = ''
+        },
+
         pushRouter(category: string) {
             this.$router.push({ name: 'productCategory', params: { category } });
         },
@@ -32,6 +48,16 @@ export default defineComponent({
         returnTheme() {
             this.$emit('changeTheme');
             this.dataTheme = localStorage.getItem('data-theme') == 'light' ? 'dark' : 'light'
+        },
+
+        async handleSearch() {
+            try {
+                await useProductsStore().searchProducts(this.searchQuery);
+                this.searchResults = useProductsStore().searchResults;
+                this.showPreview = true;
+            } catch (error) {
+                console.error('Error during search:', error);
+            }
         }
     },
     computed: {
@@ -65,25 +91,85 @@ export default defineComponent({
             </nav>
             <div class="header__search" :class="{ active: showSearch }">
                 <div class="container">
-                    <form class="header__search--form">
-                        <baseIcon @click="showSearch = !showSearch" class="header__search--close" icon="close" width="20" height="20" colors="secondary" clickable/>
-                        <input class="header__search--input" type="text" placeholder="Busque seu produto">
-                        <input class="header__search--submit" type="submit" value="Search">
+                    <form class="header__search--form" @submit.prevent="handleSearch">
+                        <baseIcon   @click="closeAllSearch" 
+                                    class="header__search--close" 
+                                    icon="close" 
+                                    width="20" height="20" 
+                                    colors="secondary" 
+                                    clickable/>
+
+                        <input  v-model="searchQuery"
+                                class="header__search--input" 
+                                type="text" 
+                                placeholder="Busque seu produto">
+
+                        <baseIcon 
+                            v-if="searchQuery"
+                            @click="closeAllSearch"
+                            icon="close"
+                            width="24" height="26"
+                            colors="secondary"
+                            clickable
+                        />
+
+                        <input  class="header__search--submit" 
+                                type="submit" 
+                                value="Search">
                     </form>
                 </div>
             </div>
             <div class="header__utils">
-                <baseIcon @click="showSearch = !showSearch" class="header__utils--search" icon="search" width="30" height="30" colors="primary" clickable/>
-                <baseIcon @click="toggleCart" icon="cart" width="30" height="30" colors="primary" :badge="totalItems" clickable/>
-                <baseIcon class="header__utils--user" icon="user" width="30" height="30" colors="primary" clickable/>
-                <baseIcon @click="returnTheme" :icon="dataTheme == 'light' ? 'dark' : 'light'" width="30" height="30" colors="primary" clickable/>
-                <baseIcon @click="toggleMenu" class="header__utils--menu" icon="menu" width="30" height="30" colors="primary" clickable/>
+                <baseIcon   @click="showSearch = !showSearch" 
+                            class="header__utils--search" 
+                            icon="search" 
+                            width="30" height="30" 
+                            colors="primary" 
+                            clickable/>
+                
+                <baseIcon   @click="toggleCart" 
+                            icon="cart" 
+                            width="30" height="30" 
+                            colors="primary" 
+                            :badge="totalItems" 
+                            clickable/>
+                
+                <baseIcon   class="header__utils--user" 
+                            icon="user" 
+                            width="30" height="30" 
+                            colors="primary" 
+                            clickable/>
+
+                <baseIcon   @click="returnTheme" 
+                            :icon="dataTheme == 'light' ? 'dark' : 'light'" 
+                            width="30" height="30" 
+                            colors="primary" 
+                            clickable/>
+                
+                <baseIcon   @click="toggleMenu" 
+                            class="header__utils--menu" 
+                            icon="menu" 
+                            width="30" height="30" 
+                            colors="primary" 
+                            clickable/>
             </div>
         </div>
     </header>
 
-    <layoutMobileMenu :show="showMenu" @toggleMenu="toggleMenu"/>
-    <layoutCart :show="showCart" @toggleCart="toggleCart"/>
+    <layoutMobileMenu 
+        :show="showMenu" 
+        @toggleMenu="toggleMenu"
+    />
+
+    <layoutCart 
+        :show="showCart" 
+        @toggleCart="toggleCart"
+    />
+
+    <layoutSearchPreview 
+        :show="showPreview"
+        v-if="searchResults" 
+        :searchResults="searchResults" />
 </template>
 
 <style lang="scss" scoped>
@@ -94,6 +180,7 @@ export default defineComponent({
     top: 0;
     left: 0;
     padding: 20px 0;
+    transition: all .3s linear;
     z-index: $header;
 
     & > .container {
