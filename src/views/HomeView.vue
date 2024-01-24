@@ -17,15 +17,15 @@ export default defineComponent({
                 padding: {right: 60},
                 gap: '.8rem',
                 breakpoints: {
-                    550: {
+                    713: {
                         perPage: 1,
                     },
-                    780: {
+                    1290: {
                         perPage: 2,
                     },
-                    1200: {
+                    1400: {
                         perPage: 3,
-                    },
+                    }
                 },
             }
         };

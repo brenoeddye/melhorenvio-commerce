@@ -124,15 +124,20 @@ export default defineComponent({
             display: none;
         }
 
+        .product__figure {
+            max-width: 120px;
+            max-height: 180px;
+        }
+
         .product__figcaption {
-            padding: 0 12px;
+            padding: 0 24px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             span {
                 font-size: 34px;
-            }
-
-            h2 {
-                padding: 20px 0;
             }
         }
     }
