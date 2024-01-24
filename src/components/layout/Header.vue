@@ -105,6 +105,7 @@ export default defineComponent({
                                 placeholder="Busque seu produto">
 
                         <baseIcon 
+                            class="header__search--mobile"
                             v-if="searchQuery"
                             @click="closeAllSearch"
                             icon="close"
@@ -264,9 +265,16 @@ export default defineComponent({
         padding-bottom: 8px;
         width: 100%;
         margin: 0 20px;
+        transition: all .3s linear;
 
         @include phone {
             margin: 0;
+        }
+
+        &--mobile {
+            @include desktop {
+                display: none;
+            }
         }
         
         & > .container {
@@ -283,6 +291,7 @@ export default defineComponent({
             border-radius: 6px;
             padding: 8px 14px;
             box-shadow: 0px 2px 5px #26303C33;
+            transition: all .3s linear;
 
             @include phone {
                 width: 100%;
@@ -291,6 +300,10 @@ export default defineComponent({
             @include tablet {
                 width: 100%;
             }
+        }
+
+        &--input {
+            transition: all .3s linear;
         }
 
         @include phone {
@@ -306,7 +319,6 @@ export default defineComponent({
             left: 30%;
             visibility: hidden;
             opacity: 0;
-            transition: all .3s linear;
 
             &.active {
                 visibility: visible;

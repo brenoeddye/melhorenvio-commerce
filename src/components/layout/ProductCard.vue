@@ -8,6 +8,7 @@ export default defineComponent({
         name:   String,
         price:  Number,
         imgSrc: String,
+        size:   String,
     },
     data() {
         return {
@@ -39,7 +40,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="product">
+    <div :class="'product ' + size">
         <div class="product__header">
             <span>{{ $t('currency') }}{{ price }}</span>
 
@@ -49,10 +50,11 @@ export default defineComponent({
             <img class="product__figure--img" v-lazy="imgObj" :alt="name">
         </figure>
         <figcaption class="product__figcaption">
+            <span v-if="size == 'medium'">{{ $t('currency') }}{{ price }}</span>
             <h2 class="product__figcaption--name">{{ limitedName }}</h2>
-        </figcaption>
 
-        <baseButton @click="addToCart" type="primary">{{ $t('btn-add') }}</baseButton>
+            <baseButton @click="addToCart" type="primary">{{ $t('btn-add') }}</baseButton>
+        </figcaption>
     </div>
 </template>
 
@@ -110,6 +112,29 @@ export default defineComponent({
 
     button {
         width: 100%;
+    }
+
+    &.medium {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        margin: 8px;
+        .product__header {
+            display: none;
+        }
+
+        .product__figcaption {
+            padding: 0 12px;
+
+            span {
+                font-size: 34px;
+            }
+
+            h2 {
+                padding: 20px 0;
+            }
+        }
     }
 }
 </style>

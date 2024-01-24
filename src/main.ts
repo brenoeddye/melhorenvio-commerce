@@ -3,6 +3,8 @@ import { createPinia } from 'pinia'
 import VueLazyload from 'vue-lazyload'
 import { FluentBundle, FluentResource } from '@fluent/bundle'
 import { createFluentVue } from 'fluent-vue'
+import VueSplide from '@splidejs/vue-splide';
+
 import brMessages from './languages/br.ftl?raw'
 const brBundle = new FluentBundle('br')
 
@@ -21,6 +23,7 @@ app.use(createPinia())
 app.use(router)
 app.use(fluent)
 app.use(VueLazyload)
+app.use(VueSplide);
 
 app.config.globalProperties.$fluent = fluent;
 

@@ -25,6 +25,10 @@ export default defineComponent({
         padding-top: 140px;
     }
 
+    @include tablet {
+        padding-top: 119px;
+    }
+
     &__text {
         position: absolute;
         top: 20%;
