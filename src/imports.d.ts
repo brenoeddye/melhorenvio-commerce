@@ -1,6 +1,5 @@
 export {}
 declare global {
-  const @splidejsVueSplideD: typeof import('C:/Users/breno/OneDrive/Documentos/Development/melhorenvio-commerce/src/core/types/@splidejs__vue-splide.d')['default']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const computed: typeof import('vue')['computed']
@@ -67,7 +66,6 @@ declare global {
 import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface ComponentCustomProperties {
-    readonly @splidejsVueSplideD: UnwrapRef<typeof import('C:/Users/breno/OneDrive/Documentos/Development/melhorenvio-commerce/src/core/types/@splidejs__vue-splide.d')['default']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

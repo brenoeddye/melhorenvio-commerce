@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import VueLazyload from 'vue-lazyload'
 import { FluentBundle, FluentResource } from '@fluent/bundle'
 import { createFluentVue } from 'fluent-vue'
+// @ts-ignore
 import VueSplide from '@splidejs/vue-splide';
 
 import brMessages from './languages/br.ftl?raw'
