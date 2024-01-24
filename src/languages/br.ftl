@@ -15,6 +15,7 @@ menu-sneakers = Tênis
 menu-shoes = Sapatos
 menu-pajamas = Pijamas
 menu-underwear = Roupas intimas
+menu-eletronics = Eletrônicos
 
 -> Buttons
 btn-add = Adicionar

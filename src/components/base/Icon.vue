@@ -42,11 +42,11 @@ export default defineComponent({
     display: flex;
 
     &.primary {
-        filter: invert(22%) sepia(100%) saturate(1800%) hue-rotate(199deg) brightness(97%) contrast(96%);
+        filter: var(--primary-code);
     }
 
     &.white {
-        filter: invert(100%) sepia(0%) saturate(7478%) hue-rotate(40deg) brightness(105%) contrast(105%);
+        filter: var(--secondary-code);
     }
 }
 .badge {

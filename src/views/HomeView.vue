@@ -48,7 +48,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .home {
-    padding-top: 85px;
+    padding-top: 105px;
 
     @include phone {
         padding-top: 140px;

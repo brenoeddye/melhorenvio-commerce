@@ -4,23 +4,41 @@ import { useCartStore } from '@/stores/cart';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+    emits: ['changeTheme'],
     data() {
         return {
             menuData: menuData,
 
             showSearch: false,
             showCart: false,
+            showMenu: false,
+
+            dataTheme: localStorage.getItem('data-theme')
         }
     },
     methods: {
         toggleCart() {
             return this.showCart = !this.showCart;
+        },
+
+        toggleMenu() {
+            return this.showMenu = !this.showMenu;
+        },
+
+        pushRouter(category: string) {
+            this.$router.push({ name: 'productCategory', params: { category } });
+        },
+
+        returnTheme() {
+            this.$emit('changeTheme');
+            this.dataTheme = localStorage.getItem('data-theme') == 'light' ? 'dark' : 'light'
         }
     },
     computed: {
         cartItems() {
             return useCartStore().items;
         },
+        
         totalItems() {
             return this.cartItems.reduce((total, item) => total + item.quantity, 0);
         }
@@ -40,11 +58,8 @@ export default defineComponent({
             </div>
             <nav class="header__navbar" :class="{ hide: showSearch }">
                 <ul>
-                    <li class="header__navbar--title">
-                        {{ $t('header-navbar-title') }}
-                    </li>
                     <li v-for="(item, index) in menuData" :key="index">
-                        <a :href="item.link" :target="item.isNewTab ? '_blank' : ''"> {{ $t(item.content) }}</a>
+                        <a @click="pushRouter(item.link)" :target="item.isNewTab ? '_blank' : ''"> {{ $t(item.content) }}</a>
                     </li>
                 </ul>
             </nav>
@@ -60,11 +75,14 @@ export default defineComponent({
             <div class="header__utils">
                 <baseIcon @click="showSearch = !showSearch" class="header__utils--search" icon="search" width="30" height="30" colors="primary" clickable/>
                 <baseIcon @click="toggleCart" icon="cart" width="30" height="30" colors="primary" :badge="totalItems" clickable/>
-                <baseIcon icon="user" width="30" height="30" colors="primary" clickable/>
+                <baseIcon class="header__utils--user" icon="user" width="30" height="30" colors="primary" clickable/>
+                <baseIcon @click="returnTheme" :icon="dataTheme == 'light' ? 'dark' : 'light'" width="30" height="30" colors="primary" clickable/>
+                <baseIcon @click="toggleMenu" class="header__utils--menu" icon="menu" width="30" height="30" colors="primary" clickable/>
             </div>
         </div>
     </header>
 
+    <layoutMobileMenu :show="showMenu" @toggleMenu="toggleMenu"/>
     <layoutCart :show="showCart" @toggleCart="toggleCart"/>
 </template>
 
@@ -87,6 +105,10 @@ export default defineComponent({
 
     &__logo {
         max-width: 100px;
+
+        @include phone {
+            display: none;
+        }
 
         @include tablet {
             display: none;
@@ -146,15 +168,6 @@ export default defineComponent({
                         color: var(--primary-hover);
                     }
                 }
-
-                &.header__navbar--title {
-                    @include tablet {
-                        display: none;
-                    }
-                    @include desktop {
-                        display: none;
-                    }
-                }
             }
         }
     }
@@ -164,6 +177,10 @@ export default defineComponent({
         padding-bottom: 8px;
         width: 100%;
         margin: 0 20px;
+
+        @include phone {
+            margin: 0;
+        }
         
         & > .container {
             @include phone {
@@ -224,7 +241,9 @@ export default defineComponent({
         }
 
         &--input {
+            background-color: var(--secondary);
             width: 100%;
+            color: var(--font-color);
         }
 
         &--submit {
@@ -244,13 +263,27 @@ export default defineComponent({
 
         @include desktop {
             justify-content: space-between;
-            max-width: 120px;
+            max-width: 140px;
             width: 100%;
         }
 
         &--search {
             display: none;
             @include desktop {
+                display: block;
+            }
+        }
+
+        &--user {
+            @include mobile {
+                display: none;
+            }
+        }
+
+        &--menu {
+            display: none;
+            
+            @include mobile {
                 display: block;
             }
         }

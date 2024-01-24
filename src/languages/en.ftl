@@ -15,6 +15,7 @@ menu-sneakers = Sneakers
 menu-shoes = Shoes
 menu-pajamas = Pajamas
 menu-underwear = Underwear
+menu-eletronics = Eletronics
 
 -> Buttons
 btn-add = Add to cart
