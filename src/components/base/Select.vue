@@ -16,12 +16,18 @@ export default defineComponent({
             showOptions: false,
         }
     },
+    methods: {
+        selectOption(option: IMenu) {
+            this.actual = option.content;
+            this.$emit('categorySelected', option.link);
+        }
+    }
 })
 </script>
 
 <template>
     <div class="select" @click="showOptions = !showOptions">
-        <span>{{ actual }}</span>
+        <h3>{{ actual }}</h3>
         <baseIcon 
             class="select__arrow"
             icon="arrow-down"
@@ -31,7 +37,16 @@ export default defineComponent({
         />
 
         <ul class="select__options" :class="{ active: showOptions }">
-            <li @click="actual = option.content" v-for="option in options" :index="option">
+            <li class="select__options--title">
+                <span>Categorias</span>
+                <baseIcon 
+                    icon="close"
+                    width="24" height="24"
+                    colors="primary"
+                    clickable
+                />
+            </li>
+            <li @click="selectOption(option)" v-for="option in options" :index="option">
                 {{ option.content }}
             </li>
         </ul>
@@ -50,7 +65,9 @@ export default defineComponent({
     position: relative;
     cursor: pointer;
 
-    span {
+    h3 {
+        font-size: 16px;
+        font-weight: 400;
         padding: 12px 34px 12px 12px;
     }
 
@@ -66,18 +83,29 @@ export default defineComponent({
         opacity: 0;
         position: absolute;
         top: 0;
-        width: 189px;
+        width: 100%;
         border-radius: 4px;
         padding: 3px 12px;
         transition: all .25s linear;
         z-index: $select-drop;
 
+        &--title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         li {
             padding: 4px 0;
+            border-bottom: 1px solid var(--secondary-border);
+
+            &:last-child {
+                border-bottom: 0;
+            }
         }
 
         &.active {
-            top: 42px;
+            top: 52px;
             visibility: visible;
             opacity: 1;
         }

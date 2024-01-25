@@ -13,25 +13,35 @@ export const useProductsStore = defineStore('products', {
         searchResults: [],
     }),
     actions: {
-      async fetchProducts() {
-          try {
-              const response = await getProducts();
-              this.products = response.data;
-          } catch (error) {
-              console.error('Error:', error);
-          }
-      },
+        async fetchProducts() {
+            try {
+                const response = await getProducts();
+                this.products = response.data;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        },
 
-      async searchProducts(query: string) {
-          if (!query) {
-              this.searchResults = [];
-          } else {
-              const lowercaseQuery = query.toLowerCase();
-              this.searchResults = this.products.filter((product) =>
-                product.title.toLowerCase().includes(lowercaseQuery)
-              );
-          }
-      },
+        async searchProducts(query: string) {
+            if (!query) {
+                this.searchResults = [];
+            } else {
+                const lowercaseQuery = query.toLowerCase();
+                this.searchResults = this.products.filter((product) =>
+                    product.title.toLowerCase().includes(lowercaseQuery)
+                );
+            }
+        },
+
+        filterProductsByCategory(category: string) {
+            if (!category) {
+                this.searchResults = this.products;
+            } else {
+                this.searchResults = this.products.filter((product) =>
+                    product.category.toLowerCase() === category.toLowerCase()
+                );
+            }
+        },
     },
 });
 

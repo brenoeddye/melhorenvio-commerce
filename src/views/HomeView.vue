@@ -10,6 +10,7 @@ export default defineComponent({
         return {
             productsStore: useProductsStore(),
             menuContent: menuContent,
+            getResults: false,
 
             splideOptions: {
                 rewind: true,
@@ -36,10 +37,20 @@ export default defineComponent({
         async fetchProducts() {
             await this.productsStore.fetchProducts();
         },
+
+        selectedCategory(category: string) {
+            console.log('Categoria selecionada:', category);
+            this.productsStore.filterProductsByCategory(category);
+            this.getResults = true;
+        }
     },
     computed: {
         products() {
             return this.productsStore.products;
+        },
+
+        searchResults() {
+            return this.productsStore.searchResults;
         },
     },
     mounted() {
@@ -69,10 +80,23 @@ export default defineComponent({
                 <h2 class="home__showcase--header-title">Produtos</h2>
                 <baseSelect 
                     placeholder="Categorias" 
-                    :options="menuContent" />
+                    :options="menuContent"
+                    @categorySelected="selectedCategory"
+                />
             </div>
+
+            <h2 class="home__showcase--warn" v-if="getResults && searchResults.length <= 0">Infelizmente não temos produtos com esta categoria, mas você pode curtir esses:</h2>
             
-            <ul class="container">
+            <ul v-if="searchResults.length > 0" class="container">
+                <layoutProductCard
+                    v-for="product in searchResults" :key="product.id"
+                    :id="product.id"
+                    :name="product.title"
+                    :price="product.price"
+                    :imgSrc="product.image" />
+            </ul>
+
+            <ul class="container" v-else>
                 <layoutProductCard
                     v-for="product in products" :key="product.id"
                     :id="product.id"
@@ -113,6 +137,12 @@ export default defineComponent({
                 margin-top: 24px;
                 margin-bottom: 38px;
             }
+        }
+
+        &--warn {
+            @include container;
+            font-weight: 400;
+            margin-bottom: 18px; 
         }
         .container {
             @include container;
