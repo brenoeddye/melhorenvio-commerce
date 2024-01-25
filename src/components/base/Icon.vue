@@ -45,7 +45,7 @@ export default defineComponent({
         filter: var(--primary-code);
     }
 
-    &.white {
+    &.secondary {
         filter: var(--secondary-code);
     }
 }
