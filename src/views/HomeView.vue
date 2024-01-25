@@ -63,7 +63,7 @@ export default defineComponent({
         </div>
 
         <div class="home__showcase">
-            <h2 class="home__showcase--title">{{ $t('home-title') }}</h2>
+            <h2 class="home__showcase--title">Produtos</h2>
             <ul class="container">
                 <layoutProductCard
                     v-for="product in products" :key="product.id"

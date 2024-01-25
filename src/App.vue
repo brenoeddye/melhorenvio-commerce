@@ -1,17 +1,9 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { FluentBundle, FluentResource } from '@fluent/bundle'
-import { createFluentVue } from 'fluent-vue'
-
-import enMessages from './languages/en.ftl?raw'
-import brMessages from './languages/br.ftl?raw'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     data() {
         return {
-            enBundle: new FluentBundle('en'),
-            brBundle: new FluentBundle('br'),
-
             dataTheme: document.documentElement.getAttribute('data-theme') || document.documentElement.setAttribute('data-theme', 'dark')
         }
     },

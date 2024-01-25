@@ -79,13 +79,13 @@ export default defineComponent({
                 <img src="/imgs/logo.webp" alt="store-logo">
             </router-link>
             <div class="header__profile">
-                <h3 class="header__profile--username">{{ $t('header-username') }}</h3>
-                <p class="header__profile--address">{{ $t('header-address') }}</p>
+                <h3 class="header__profile--username">Olá, Dwight</h3>
+                <p class="header__profile--address">1725 Slough Avenue</p>
             </div>
             <nav class="header__navbar" :class="{ hide: showSearch }">
                 <ul>
                     <li v-for="(item, index) in menuData" :key="index">
-                        <a @click="pushRouter(item.link)" :target="item.isNewTab ? '_blank' : ''"> {{ $t(item.content) }}</a>
+                        <a @click="pushRouter(item.link)" :target="item.isNewTab ? '_blank' : ''"> {{ item.content }}</a>
                     </li>
                 </ul>
             </nav>

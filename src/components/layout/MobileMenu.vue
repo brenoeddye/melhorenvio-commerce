@@ -28,11 +28,11 @@ export default defineComponent({
     <div class="mobile-nav" :class="{ active: show }">
         <ul>
             <li class="mobile-nav__title">
-                {{ $t('header-navbar-title') }}
+                Categorias
                 <baseIcon @click="toggleMenu" icon="close" width="30" height="30" colors="primary" clickable/>
             </li>
             <li v-for="(item, index) in menuData" :key="index">
-                <a @click="pushRouter(item.link)" :target="item.isNewTab ? '_blank' : ''"> {{ $t(item.content) }}</a>
+                <a @click="pushRouter(item.link)" :target="item.isNewTab ? '_blank' : ''"> {{ item.content }}</a>
             </li>
         </ul>
     </div>

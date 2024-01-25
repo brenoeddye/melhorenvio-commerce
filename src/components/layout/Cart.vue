@@ -37,7 +37,7 @@ export default defineComponent({
     <div class="cart" :class="{ active: show }">
         <div class="cart__header">
             <baseIcon @click="toggleCart" icon="arrow-left" width="26" height="24" colors="primary" clickable/>
-            <h2 class="cart__header--title">{{ $t('cart-title') }}</h2>
+            <h2 class="cart__header--title">Meu carrinho</h2>
         </div>
         <ul class="cart__items">
             <li v-for="item in cartItems" :key="item.product.id">
@@ -52,8 +52,8 @@ export default defineComponent({
                                 {{ item.quantity }}
                             </div>
                             <div class="cart__items--product-total">
-                                <span>{{ $t('cart-total') }}</span>
-                                <b>{{ $t('currency') }}{{ item.product.price }}</b>
+                                <span>Total</span>
+                                <b>${{ item.product.price }}</b>
                             </div>
                         </div>
                     </figcaption>
@@ -63,20 +63,20 @@ export default defineComponent({
             </li>
         </ul>
         <div class="cart__footer">
-            <span>{{ $t('cart-payment-detail') }}</span>
+            <span>Detalhes de pagamento</span>
 
             <ul class="cart__footer--resume">
                 <li class="cart__footer--resume-fields">
-                    <span>{{ $t('cart-resume-items') }}</span>
-                    <b>{{ totalItems }} {{ $t('cart-resume-quantity') }}</b>
+                    <span>Número de itens:</span>
+                    <b>{{ totalItems }} itens</b>
                 </li>
                 <li class="cart__footer--resume-fields">
-                    <span>{{ $t('cart-resume-subtotal') }}</span>
-                    <b class="total">{{ $t('currency') }} {{ subtotal }}</b>
+                    <span>Subtotal: </span>
+                    <b class="total">$ {{ subtotal }}</b>
                 </li>
             </ul>
 
-            <baseButton class="cart__footer--finish" type="finish">{{ $t('cart-resume-finish') }}</baseButton>
+            <baseButton class="cart__footer--finish" type="finish">Finalizar compra</baseButton>
         </div>
     </div>
 </template>

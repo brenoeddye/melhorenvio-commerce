@@ -2,42 +2,42 @@ import { type IMenu } from "../types/menuTypes";
 
 const menuContent: IMenu[] = [
     {
-        content: "menu-tshirts",
+        content: "Camiseta",
         link: "men's clothing",
         isNewTab: false,
     },
     {
-        content: "menu-shirts",
+        content: "Camisa",
         link: "women's clothing",
         isNewTab: false,
     },
     {
-        content: "menu-pants",
+        content: "Calças",
         link: "pants",
         isNewTab: false,
     },
     {
-        content: "menu-sneakers",
+        content: "Tênis",
         link: "sneakers",
         isNewTab: false,
     },
     {
-        content: "menu-shoes",
+        content: "Sapatos",
         link: "shoes",
         isNewTab: false,
     },
     {
-        content: "menu-pajamas",
+        content: "Pijamas",
         link: "pajamas",
         isNewTab: false,
     },
     {
-        content: "menu-underwear",
+        content: "Roupas intimas",
         link: "underwear",
         isNewTab: false,
     },
     {
-        content: "menu-eletronics",
+        content: "Eletrônicos",
         link: "electronics",
         isNewTab: false,
     }

@@ -42,7 +42,7 @@ export default defineComponent({
 <template>
     <div :class="'product ' + size">
         <div class="product__header">
-            <span>{{ $t('currency') }}{{ price }}</span>
+            <span>$ {{ price }}</span>
 
             <baseIcon icon="heart" width="18" height="16" colors="secondary"/>
         </div>
@@ -50,10 +50,10 @@ export default defineComponent({
             <img class="product__figure--img" v-lazy="imgObj" :alt="name">
         </figure>
         <figcaption class="product__figcaption">
-            <span v-if="size == 'medium'">{{ $t('currency') }}{{ price }}</span>
+            <span v-if="size == 'medium'">$ {{ price }}</span>
             <h2 class="product__figcaption--name">{{ limitedName }}</h2>
 
-            <baseButton @click="addToCart" type="primary">{{ $t('btn-add') }}</baseButton>
+            <baseButton @click="addToCart" type="primary">Adicionar</baseButton>
         </figcaption>
     </div>
 </template>
