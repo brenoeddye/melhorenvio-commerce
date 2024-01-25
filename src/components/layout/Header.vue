@@ -416,6 +416,16 @@ export default defineComponent({
             width: 100%;
         }
 
+        @include phone {
+            div {
+                margin-right: 8px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
         &--search {
             display: none;
             @include desktop {
