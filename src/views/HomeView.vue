@@ -42,7 +42,7 @@ export default defineComponent({
             console.log('Categoria selecionada:', category);
             this.productsStore.filterProductsByCategory(category);
             this.getResults = true;
-        }
+        },
     },
     computed: {
         products() {
@@ -93,7 +93,8 @@ export default defineComponent({
                     :id="product.id"
                     :name="product.title"
                     :price="product.price"
-                    :imgSrc="product.image" />
+                    :imgSrc="product.image" 
+                />
             </ul>
 
             <ul class="container" v-else>
@@ -102,7 +103,8 @@ export default defineComponent({
                     :id="product.id"
                     :name="product.title"
                     :price="product.price"
-                    :imgSrc="product.image" />
+                    :imgSrc="product.image"
+                />
             </ul>
         </div>
     </main>

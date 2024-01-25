@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useProductsStore } from '@/stores/productsAPI';
-import { type IProduct } from '@/core/types/productTypes';
 
 export default defineComponent({
     data() {

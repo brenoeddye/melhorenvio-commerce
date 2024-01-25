@@ -17,13 +17,19 @@ export const useCartStore = defineStore('cart', {
         items: [] as ICart[],
     }),
     actions: {
-        addToCart(product: IProduct) {
+        addToCart(product: IProduct, quantity?: number) {
             const hasItem = this.items.find((item) => item.product.id === product.id);
-      
+            const parsedQuantity = quantity !== undefined ? quantity : 1;
+
+            if (isNaN(parsedQuantity) || parsedQuantity < 1) {
+                console.error('Quantidade inválida. A quantidade deve ser um número inteiro positivo.');
+                return;
+            }
+
             if (hasItem) {
-                hasItem.quantity++;
+                hasItem.quantity += parsedQuantity;
             } else {
-              this.items.push({ product, quantity: 1 });
+                this.items.push({ product, quantity: parsedQuantity });
             }
         },
 
