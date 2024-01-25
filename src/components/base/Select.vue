@@ -6,8 +6,8 @@ export default defineComponent({
     props: {
         placeholder: String,
         options: {
-            type: Object as () => IMenu,
-            default: () => ({} as IMenu),
+            type: Array as () => IMenu[],
+            default: () => [],
         },
     },
     data() {
@@ -16,11 +16,6 @@ export default defineComponent({
             showOptions: false,
         }
     },
-    methods: {
-        isMenu(option: any): option is IMenu {
-            return option && typeof option === 'object' && 'content' in option;
-        },
-    }
 })
 </script>
 
@@ -36,8 +31,8 @@ export default defineComponent({
         />
 
         <ul class="select__options" :class="{ active: showOptions }">
-            <li @click="actual = isMenu(option) ? option.content : 'Invalid Option'" v-for="option in options" :index="option">
-                {{ isMenu(option) ? option.content : 'Invalid Option' }}
+            <li @click="actual = option.content" v-for="option in options" :index="option">
+                {{ option.content }}
             </li>
         </ul>
     </div>
