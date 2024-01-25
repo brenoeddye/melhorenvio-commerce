@@ -13,7 +13,16 @@ export default defineComponent({
 
         toggleCart() {
             this.$emit('toggleCart');
-        }
+        },
+
+        updateQuantity(item: any, action: string) {
+            const cartStore = useCartStore();
+            if (action === 'increase') {
+                cartStore.increaseQuantity(item.product.id);
+            } else if (action === 'decrease') {
+                cartStore.decreaseQuantity(item.product.id);
+            }
+        },
     },
     computed: {
         cartItems() {
@@ -49,7 +58,23 @@ export default defineComponent({
                         <h3 class="cart__items--product-figcaption-name">{{ item.product.name }}</h3>
                         <div class="cart__items--product-details">
                             <div class="cart__items--product-quantity">
-                                {{ item.quantity }}
+                                <button class="cart__items--product-quantity-minus" @click="updateQuantity(item, 'decrease')">
+                                    <baseIcon 
+                                        icon="arrow-left"
+                                        width="28" height="28"
+                                        colors="primary"
+                                        clickable
+                                    />
+                                </button>
+                                <span>{{ item.quantity }}</span>
+                                <button class="cart__items--product-quantity-plus" @click="updateQuantity(item, 'increase')">
+                                    <baseIcon 
+                                        icon="arrow-right"
+                                        width="28" height="28"
+                                        colors="primary"
+                                        clickable
+                                    />
+                                </button>
                             </div>
                             <div class="cart__items--product-total">
                                 <span>Total</span>
@@ -148,6 +173,37 @@ export default defineComponent({
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+                    margin-bottom: 14px;
+                }
+            }
+
+            &-quantity {
+                background-color: var(--secondary);
+                border: 1px solid var(--secondary-border);
+                box-shadow: var(--box-shadow);
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+
+                @media (max-width: 374px) {
+                    margin-bottom: 8px;
+                }
+
+                button {
+                    background-color: var(--secondary);
+                    padding: 4px 2px;
+                }
+
+                span {
+                    padding: 0 18px;
+                }
+
+                &-minus {
+                    border-right: 1px solid var(--secondary-border);
+                }
+
+                &-plus {
+                    border-left: 1px solid var(--secondary-border);
                 }
             }
 
@@ -156,6 +212,11 @@ export default defineComponent({
                 align-items: center;
                 justify-content: space-between;
                 padding: 0 6px;
+
+                @media (max-width: 374px) {
+                    flex-direction: column;
+                    align-items: start;
+                }
             }
 
             &-total {
