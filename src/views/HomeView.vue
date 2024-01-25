@@ -3,11 +3,13 @@ import useProductsStore from '../stores/productsAPI';
 import '@splidejs/vue-splide/css';
 import '@splidejs/splide/css/skyblue';
 import { defineComponent } from 'vue'
+import menuContent from '@/core/data/menuData';
 
 export default defineComponent({
     data() {
         return {
             productsStore: useProductsStore(),
+            menuContent: menuContent,
 
             splideOptions: {
                 rewind: true,
@@ -63,7 +65,13 @@ export default defineComponent({
         </div>
 
         <div class="home__showcase">
-            <h2 class="home__showcase--title">Produtos</h2>
+            <div class="home__showcase--header">
+                <h2 class="home__showcase--header-title">Produtos</h2>
+                <baseSelect 
+                    placeholder="Categorias" 
+                    :options="menuContent" />
+            </div>
+            
             <ul class="container">
                 <layoutProductCard
                     v-for="product in products" :key="product.id"
@@ -89,11 +97,22 @@ export default defineComponent({
     }
 
     &__showcase {
-        &--title {
+        &--header {
             @include container;
-            font-size: 20px;
-            margin-top: 24px;
-            margin-bottom: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @media (max-width: 300px) {
+                flex-direction: column;
+                margin-bottom: 24px;
+            }
+
+            &-title {
+                font-size: 20px;
+                margin-top: 24px;
+                margin-bottom: 38px;
+            }
         }
         .container {
             @include container;

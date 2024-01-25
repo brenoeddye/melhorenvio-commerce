@@ -18,6 +18,9 @@ export default defineComponent({
             showCart: false,
             showMenu: false,
             showPreview: false,
+            showAddress: false,
+
+            actualAddress: '1725 Slough Avenue',
 
             dataTheme: localStorage.getItem('data-theme')
         }
@@ -80,7 +83,19 @@ export default defineComponent({
             </router-link>
             <div class="header__profile">
                 <h3 class="header__profile--username">Olá, Dwight</h3>
-                <p class="header__profile--address">1725 Slough Avenue</p>
+                <p @click="showAddress = !showAddress" class="header__profile--address">{{ actualAddress }} <baseIcon icon="arrow-down" width="12" height="12" colors="secondary" clickable/></p>
+
+                <ul @click="showAddress = false" class="header__profile--address-drop" :class="{ active: showAddress }">
+                    <li @click="actualAddress = '1725 Slough Avenue'">
+                        1725 Slough Avenue
+                    </li>
+                    <li @click="actualAddress = '1940 Boston Avenue'">
+                        1940 Boston Avenue
+                    </li>
+                    <li @click="actualAddress = 'Rua Campos da Paz, 87'">
+                        Rua Campos da Paz, 87
+                    </li>
+                </ul>
             </div>
             <nav class="header__navbar" :class="{ hide: showSearch }">
                 <ul>
@@ -210,6 +225,7 @@ export default defineComponent({
     &__profile {
         font-size: 18px;
         font-weight: 600;
+        min-width: 106px;
 
         &--username {
             font-size: 20px;
@@ -217,8 +233,42 @@ export default defineComponent({
         }
 
         &--address {
+            display: flex;
+            align-items: center;
             font-size: 12px;
             font-weight: 400;
+            position: relative;
+
+            &-drop {
+                position: absolute;
+                background-color: var(--secondary);
+                border: 1px solid var(--secondary-border);
+                box-shadow: var(--box-shadow);
+                padding: 4px 12px;
+                border-radius: 4px;
+                top: 40px;
+                visibility: hidden;
+                opacity: 0;
+                transition: all .3s linear;
+                z-index: $address-drop;
+
+                &.active {
+                    visibility: visible;
+                    opacity: 1;
+                    top: 60px;
+                }
+
+                li {
+                    font-size: 12px;
+                    font-weight: 400;
+                    padding: 12px 0;
+                    border-bottom: 1px solid var(--secondary-border);
+
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+                }
+            }
         }
 
         @include desktop {

@@ -137,7 +137,7 @@ export default defineComponent({
             justify-content: space-between;
 
             span {
-                font-size: 34px;
+                font-size: 32px;
             }
         }
     }
